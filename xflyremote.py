@@ -1,13 +1,20 @@
-# XpUdo
+# xflyremote.py
 # Main class for Xflyremote
-# This class does all the
-# * For the UDP code I have used big parts of charlylima's code from his Github repo. See notes below.
 # License: GPLv3
-# UDP part of the code based in big part on the library from charlylima. Eternally grateful to the author.
-# https://github.com/charlylima/XPlaneUDP/blob/master/XPlaneUdp.py
+# https://github.com/mydogspies/xflyremote-main
 
 import xpudp
 import custom_exceptions as exception
+
+
+class Xflyremote:
+    def getcommands(self):
+        # read all the commands from database
+        pass
+
+    def getdatarefs(self):
+        # read all the datarefs from database
+        pass
 
 
 if __name__ == '__main__':

@@ -1,3 +1,11 @@
+# xpudp.py
+# All the UDP functionality for the communication between Xplane and Xflyremote
+# A lot of the code is based directly on the fantastic XplaneUdp repo from charlylima (see notes below).
+# License: GPLv3
+# * UDP part of the code based in big part on the library from charlylima. Eternally grateful to the author.
+# * https://github.com/charlylima/XPlaneUDP/blob/master/XPlaneUdp.py
+
+
 import socket
 import struct
 import platform

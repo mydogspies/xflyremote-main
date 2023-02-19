@@ -1,0 +1,11 @@
+{
+   "data": [
+      {
+         "dataref": "sim/lights/nav_lights_on",
+         "type": "cmd",
+         "units": "",
+         "info": "Nav lights on",
+         "id": 369480142041569612
+      }
+   ]
+}
