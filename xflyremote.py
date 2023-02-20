@@ -5,16 +5,14 @@
 
 import xpudp
 import custom_exceptions as exception
+import logging
+from config import CONFIG
 
 
 class Xflyremote:
-    def getcommands(self):
-        # read all the commands from database
-        pass
 
-    def getdatarefs(self):
-        # read all the datarefs from database
-        pass
+    def __init__(self):
+        logging.basicConfig(level=logging.DEBUG, format=CONFIG.LOGGING_FORMAT)
 
 
 if __name__ == '__main__':
@@ -23,13 +21,8 @@ if __name__ == '__main__':
 
     try:
         beacon = xp.findip()
-        print(beacon)
         xp.sendcommand("sim/lights/nav_lights_on")
-
     except exception.VersionNotSupportedError:
-        print("Error: This Xplane version is not supported.")
         exit(0)
-
     except exception.XpNotFoundError:
-        print("Error: Xplane not found!")
         exit(0)

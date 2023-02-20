@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="">
+    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datarepo.py" beforeDir="false" afterPath="$PROJECT_DIR$/datarepo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xflydb" beforeDir="false" afterPath="$PROJECT_DIR$/xflydb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xflyremote.py" beforeDir="false" afterPath="$PROJECT_DIR$/xflyremote.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xpudp.py" beforeDir="false" afterPath="$PROJECT_DIR$/xpudp.py" afterDir="false" />
     </list>
@@ -39,7 +42,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/30_CODING/01_MIXENV/xplane/xflyremote/xflyremote-main",
+    "last_opened_file_path": "D:/30_CODING/01_MIXENV/xplane/xflyremote/xflyremote-main/test",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -50,6 +53,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\30_CODING\01_MIXENV\xplane\xflyremote\xflyremote-main\test" />
       <recent name="D:\30_CODING\01_MIXENV\xplane\xflyremote\xflyremote-main" />
     </key>
   </component>
@@ -62,16 +66,30 @@
       <option name="presentableId" value="Default" />
       <updated>1676802632309</updated>
       <workItem from="1676802633202" duration="2165000" />
-      <workItem from="1676813414957" duration="13602000" />
+      <workItem from="1676813414957" duration="13705000" />
+      <workItem from="1676917806147" duration="4775000" />
     </task>
+    <task id="LOCAL-00001" summary="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database">
+      <created>1676836570548</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676836570548</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1676831322799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$.coverage" NAME=" Coverage Results" MODIFIED="1676925156637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1676927152611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$datarepo.coverage" NAME="datarepo Coverage Results" MODIFIED="1676832428582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1676836407392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1676924990818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

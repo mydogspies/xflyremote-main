@@ -6,6 +6,13 @@
          "units": "",
          "info": "Nav lights on",
          "id": 369480142041569612
+      },
+      {
+         "dataref": "sim/test/test",
+         "type": "cmd",
+         "units": "testunits",
+         "info": "This is a test and can not be used in sim",
+         "id": 136336198132705534
       }
    ]
 }

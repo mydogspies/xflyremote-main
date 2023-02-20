@@ -4,23 +4,25 @@
 # License: GPLv3
 # * UDP part of the code based in big part on the library from charlylima. Eternally grateful to the author.
 # * https://github.com/charlylima/XPlaneUDP/blob/master/XPlaneUdp.py
-
-
+#
 import socket
 import struct
 import platform
 import custom_exceptions as exception
+from config import CONFIG
+import logging
 
 
 class XpUdp:
     # network variables
-    NETIP = "239.255.1.1"
-    XPLANEIP = "192.168.178.40"
-    DATAPORT = 49000
-    BEACONPORT = 49707
-    SOCKETTIMEOUT = 3.0
+    MULTCASTIP = "239.255.1.1"
+    XPLANEIP = CONFIG.XPLANEIP
+    DATAPORT = CONFIG.DATAPORT
+    BEACONPORT = CONFIG.BEACONPORT
+    SOCKETTIMEOUT = CONFIG.SOCKETTIMEOUT
 
     def __init__(self):
+        logging.basicConfig(level=CONFIG.LOGGING_LEVEL, format=CONFIG.LOGGING_FORMAT)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.socket.settimeout(3.0)
 
@@ -46,7 +48,6 @@ class XpUdp:
 
         addr = (self.XPLANEIP, self.DATAPORT)
         data = struct.pack('=5s500s', b'CMND', dataref.encode('utf-8'))
-        # print("Dataref command sent: ", data)
         self.defsocket().sendto(data, addr)
 
     def findip(self):
@@ -61,29 +62,25 @@ class XpUdp:
         if platform.system() == "Windows":
             sock.bind(('', self.BEACONPORT))
         else:
-            sock.bind((self.NETIP, self.BEACONPORT))
+            sock.bind((self.MULTCASTIP, self.BEACONPORT))
 
-        mreq = struct.pack("=4sl", socket.inet_aton(self.NETIP), socket.INADDR_ANY)
+        mreq = struct.pack("=4sl", socket.inet_aton(self.MULTCASTIP), socket.INADDR_ANY)
         sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
         sock.settimeout(self.SOCKETTIMEOUT)
 
         try:
             packet, sender = sock.recvfrom(1472)
-            print("Xplane beacon: ", packet.hex())
+            msg_beacon_id = "findip(): Xplane beacon: " + packet.hex()
+            logging.debug(msg_beacon_id)
 
             # decode data
             header = packet[0:5]
             if header != b"BECN\x00":
-                print("Header error: Unknown packet from " + sender[0])
+                msg_unknown_packet = "findip(): Unknown packet from " + sender(0)
+                logging.error(msg_unknown_packet)
 
             else:
                 data = packet[5:21]
-                beacon_major_version = 0
-                beacon_minor_version = 0
-                application_host_id = 0
-                xplane_version_number = 0
-                role = 0
-                port = 0
                 (
                     beacon_major_version,  # 1 at the time of X-Plane 10.40
                     beacon_minor_version,  # 1 at the time of X-Plane 10.40
@@ -103,15 +100,19 @@ class XpUdp:
                     self.beacondata["hostname"] = hostname.decode()
                     self.beacondata["XPlaneVersion"] = xplane_version_number
                     self.beacondata["role"] = role
-                    print("Beacon version: {}.{}.{}".format(beacon_major_version, beacon_minor_version,
-                                                            application_host_id))
+
+                    msg_beacon_version = "Beacon version: {}.{}.{}".format(beacon_major_version, beacon_minor_version,
+                                                                           application_host_id)
+                    logging.debug(msg_beacon_version)
                 else:
-                    print("Version {}.{}.{} beacon not supported.".format(beacon_major_version,
-                                                                          beacon_minor_version,
-                                                                          application_host_id))
+                    msg_no_support = "Version {}.{}.{} beacon not supported.".format(beacon_major_version,
+                                                                                     beacon_minor_version,
+                                                                                     application_host_id)
+                    logging.error(msg_no_support)
                     raise exception.VersionNotSupportedError()
 
         except socket.timeout:
+            logging.error("findip(): Xplane client not found (socket timeout).")
             raise exception.XpNotFoundError()
         finally:
             sock.close()

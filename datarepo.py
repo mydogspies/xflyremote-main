@@ -27,12 +27,20 @@ class Datarepo:
         pass
 
     def getbyidx(self, data_idx):
+        query = []
+        try:
+            query = self.database.getByQuery({"id": data_idx})
+            return query
+        except exception.DatabaseError:
+            logging.warning("getbyidx(): Error when trying to run database query")
+        finally:
+            logging.debug(query)
         pass
 
     def getbydataref(self, data_string):
         query = []
         try:
-            query = self.database.getBy({"dataref": data_string})
+            query = self.database.getByQuery({"dataref": data_string})
             return query
         except exception.DatabaseError:
             logging.warning("getbydataref(): Error when trying to run database query")
