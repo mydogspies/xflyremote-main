@@ -1,0 +1,39 @@
+{
+   "data": [
+      {
+         "dataref": "sim/test/test",
+         "type": "cmd",
+         "units": "testunits",
+         "info": "This is test data and does not correspond to any dataref in Xplane",
+         "id": 271047368763084128
+      },
+      {
+         "dataref": "sim/lights/nav_lights_on",
+         "type": "cmd",
+         "units": "",
+         "info": "Nav lights on",
+         "id": 122871445167490217
+      },
+      {
+         "dataref": "sim/lights/beacon_lights_on",
+         "type": "cmd",
+         "units": "",
+         "info": "Beacon lights on",
+         "id": 283325331043102391
+      },
+      {
+         "dataref": "sim/cockpit/autopilot/heading_mag",
+         "type": "float",
+         "units": "degm",
+         "info": "Magnetic heading to fly, pilot",
+         "id": 107249093576269116
+      },
+      {
+         "dataref": "sim/cockpit/misc/barometer_setting",
+         "type": "float",
+         "units": "",
+         "info": "The pilots altimeter setting",
+         "id": 131806467740651866
+      }
+   ]
+}

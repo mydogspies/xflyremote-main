@@ -2,6 +2,8 @@
 # Initiates the database from scratch with new data
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
+import json
+import os
 from datarepo import Datarepo as repo
 import logging
 from config import CONFIG
@@ -13,31 +15,42 @@ class InitDatabase:
         self.dataref = {}
         logging.basicConfig(level=logging.DEBUG, format=CONFIG.LOGGING_FORMAT)
 
-    def runinit(self):
+    def addataset(self, datajson):
         # Initiates a database from scratch with pre-defined datarefs
         rp = repo()
+        rows = len(datajson["dataset"])
+        count = 0
 
-        dataref = {"dataref": "sim/lights/nav_lights_on",
-                   "type": "cmd",
-                   "units": "",
-                   "info": "Nav lights on"}
-        # for testing only
+        for datarow in datajson["dataset"]:
+            if rp.add(datarow):
+                count += 1
+                datastr = str(datarow)
+                msg = f"addataset(): Added new dataref to db: {datastr}"
+                logging.debug(msg)
+            else:
+                logging.warning("addataset(): Adding dataref to db failed!")
+
+        logging.info(f"Added {count} datarefs out of {rows}")
+
+    def initiatenewdatabase(self):
+
+        # initiate a new database file and add the test data
+        rp = repo()
         testref = {"dataref": "sim/test/test",
                    "type": "cmd",
                    "units": "testunits",
-                   "info": "This is a test and can not be used in sim"}
-
-        if rp.add(dataref):
-            logging.debug("runinit(): Added new dataref to db: " + dataref["dataref"] + "\n")
-        else:
-            logging.warning("runinit(): Adding dataref to db failed!")
-        # for testing only
-        if rp.add(testref):
-            logging.debug("runinit(): Added new dataref to db: " + dataref["dataref"] + "\n")
-        else:
-            logging.warning("runinit(): Adding dataref to db failed!")
+                   "info": "This is test data and does not correspond to any dataref in Xplane"}
+        rp.initdb()
+        rp.add(testref)
+        logging.info("initiatenewdataset(): Current db has been reset and re-initiated")
 
 
 if __name__ == '__main__':
     init = InitDatabase()
-    init.runinit()
+
+    # init.initiatenewdatabase()
+
+    # add dataset
+    file = open("xpfly_dataset.json")
+    dataset = json.load(file)
+    init.addataset(dataset)

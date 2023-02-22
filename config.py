@@ -12,3 +12,7 @@ class CONFIG:
     DATAPORT = 49000
     BEACONPORT = 49707
     SOCKETTIMEOUT = 3.0
+    # databse settings
+    DBJSON = "xflydb.json"  # name of the json db file
+    # test settings
+    TESTFOLDERPATH = "/test"

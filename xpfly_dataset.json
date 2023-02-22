@@ -1,0 +1,28 @@
+{
+  "dataset": [
+    {
+      "dataref": "sim/lights/nav_lights_on",
+      "type": "cmd",
+      "units": "",
+      "info": "Nav lights on"
+    },
+    {
+      "dataref": "sim/lights/beacon_lights_on",
+      "type": "cmd",
+      "units": "",
+      "info": "Beacon lights on"
+    },
+    {
+      "dataref": "sim/cockpit/autopilot/heading_mag",
+      "type": "float",
+      "units": "degm",
+      "info": "Magnetic heading to fly, pilot"
+    },
+    {
+      "dataref": "sim/cockpit/misc/barometer_setting",
+      "type": "float",
+      "units": "",
+      "info": "The pilots altimeter setting"
+    }
+  ]
+}

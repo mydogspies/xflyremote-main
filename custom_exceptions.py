@@ -4,17 +4,20 @@
 # https://github.com/mydogspies/xflyremote-main
 
 class XpNotFoundError(Exception):
-    args = "Error: Could not find any running XPlane instance in the network."
+    args = "Could not find any running XPlane instance in the network."
 
 
 class NetworkTimeoutError(Exception):
-    args = "Error: XPlane timeout."
+    args = "XPlane timeout."
 
 
 class VersionNotSupportedError(Exception):
-    args = "Error: XPlane version not supported."
+    args = "XPlane version not supported."
 
 
 class DatabaseError(Exception):
-    args = "Error: Database error."
+    args = "Database error."
 
+
+class CustomIOError(Exception):
+    args = "Read/write error."
