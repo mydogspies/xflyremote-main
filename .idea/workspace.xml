@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Added unittest to datarepo and cleaned remaining print(), adding loggers">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Reworked datarepo.py and added proper exception handling. Updated tests for the Datarepo class and added file copy and automatic id recognition for the test row used by unittest. Added new method for adding entire set of datatrefs.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datarepo.py" beforeDir="false" afterPath="$PROJECT_DIR$/datarepo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testdatarepo.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testdatarepo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testxpudp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testxpudp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/xflydb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xflydb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xflyremote.py" beforeDir="false" afterPath="$PROJECT_DIR$/xflyremote.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xpudp.py" beforeDir="false" afterPath="$PROJECT_DIR$/xpudp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +58,58 @@
       <recent name="D:\30_CODING\01_MIXENV\xplane\xflyremote\xflyremote-main" />
     </key>
   </component>
+  <component name="RunManager" selected="Python.xflyremote">
+    <configuration name="xflyremote" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="xflyremote-main" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/xflyremote.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="xpudp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="xflyremote-main" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/xpudp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.xflyremote" />
+        <item itemvalue="Python.xpudp" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,7 +121,7 @@
       <workItem from="1676802633202" duration="2165000" />
       <workItem from="1676813414957" duration="13705000" />
       <workItem from="1676917806147" duration="5134000" />
-      <workItem from="1677060357281" duration="21727000" />
+      <workItem from="1677060357281" duration="30407000" />
     </task>
     <task id="LOCAL-00001" summary="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database">
       <created>1676836570548</created>
@@ -97,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676927451137</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Reworked datarepo.py and added proper exception handling. Updated tests for the Datarepo class and added file copy and automatic id recognition for the test row used by unittest. Added new method for adding entire set of datatrefs.">
+      <created>1677085984930</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677085984930</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,12 +160,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database" />
     <MESSAGE value="Added unittest to datarepo and cleaned remaining print(), adding loggers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added unittest to datarepo and cleaned remaining print(), adding loggers" />
+    <MESSAGE value="Reworked datarepo.py and added proper exception handling. Updated tests for the Datarepo class and added file copy and automatic id recognition for the test row used by unittest. Added new method for adding entire set of datatrefs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworked datarepo.py and added proper exception handling. Updated tests for the Datarepo class and added file copy and automatic id recognition for the test row used by unittest. Added new method for adding entire set of datatrefs." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/xflyremote_main$.coverage" NAME=" Coverage Results" MODIFIED="1677085748673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1676927240539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1677097889067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$datarepo.coverage" NAME="datarepo Coverage Results" MODIFIED="1677078134082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1677085733569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$xpudp.coverage" NAME="xpudp Coverage Results" MODIFIED="1677096538642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

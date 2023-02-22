@@ -3,7 +3,6 @@
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
 import json
-import os
 from datarepo import Datarepo as repo
 import logging
 from config import CONFIG

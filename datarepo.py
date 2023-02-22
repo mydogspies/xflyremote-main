@@ -8,7 +8,6 @@
 import os
 
 from pysondb import db
-import custom_exceptions as exception
 import logging
 from config import CONFIG
 from pathlib import Path

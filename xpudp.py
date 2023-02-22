@@ -11,6 +11,8 @@ import platform
 import custom_exceptions as exception
 from config import CONFIG
 import logging
+from time import sleep
+import binascii
 
 
 class XpUdp:
@@ -33,7 +35,8 @@ class XpUdp:
         self.defaultfreq = 1
 
     def __del__(self):
-        # - Add dataref reset
+        for i in range(len(self.datarefs)):
+            self.subscribedataref(next(iter(self.datarefs.values())), freq=0)
         self.socket.close()
 
     def defsocket(self):
@@ -42,13 +45,98 @@ class XpUdp:
         return sock
 
     def sendcommand(self, dataref):
-
-        # sendcommand(self, dataref)
         # Sends a Command-type dataref to Xplane
 
         addr = (self.XPLANEIP, self.DATAPORT)
         data = struct.pack('=5s500s', b'CMND', dataref.encode('utf-8'))
-        self.defsocket().sendto(data, addr)
+        self.socket.sendto(data, addr)
+
+    def senddataref(self, dataref, value, vtype="float"):
+        # Sends a dataref to Xplane
+
+        cmd = b"DREF\x00"
+        dataref = dataref + "\x00"
+        string = dataref.ljust(500).encode()
+        data = "".encode()
+
+        if vtype == "float":
+            data = struct.pack("<5sf500s", cmd, value, string)
+        elif vtype == "int":
+            data = struct.pack("<5sif500s", cmd, value, string)
+        elif vtype == "bool":
+            data = struct.pack("<5sIf500s", cmd, value, string)
+
+        assert (len(data) == 509)
+
+        self.socket.sendto(data, (self.beacondata["IP"], self.DATAPORT))
+        logging.debug("senddataref(): " + str(data))
+
+    def subscribedataref(self, dataref, freq=None):
+        # subscribes to datarefs
+
+        idx = -9999
+
+        if freq is None:
+            freq = self.defaultfreq
+
+        if dataref in self.datarefs.values():
+            idx = list(self.datarefs.keys())[list(self.datarefs.values()).index(dataref)]
+
+            if freq == 0:
+                if dataref in self.xplanevalues.keys():
+                    del self.xplanevalues[dataref]
+                del self.datarefs[idx]
+
+        else:
+            idx = self.datarefidx
+            self.datarefs[self.datarefidx] = dataref
+            self.datarefidx += 1
+
+        cmd = b"RREF\x00"
+        string = dataref.encode()
+        data = struct.pack("<5sii400s", cmd, freq, idx, string)
+
+        assert (len(data) == 413)
+
+        self.socket.sendto(data, (self.beacondata["IP"], self.beacondata["Port"]))
+        logging.debug("subscribedataref(): Added: " + str(data))
+
+        if self.datarefidx % 100 == 0:
+            sleep(0.2)
+
+    def getvalues(self):
+        # get values from subscribed datarefs
+
+        try:
+            data, addr = self.socket.recvfrom(1472)
+            retvalues = {}
+            header = data[0:5]
+
+            if header != b"RREF,":
+                print("Unknown packet: ", binascii.hexlify(data))
+            else:
+                values = data[5:]
+                lenvalue = 8
+                numvalues = int(len(values) / lenvalue)
+
+                for i in range(0, numvalues):
+                    singledata = data[(5 + lenvalue * i):(5 + lenvalue * (i + 1))]
+                    (idx, value) = struct.unpack("<if", singledata)
+
+                    if idx in self.datarefs.keys():
+
+                        if 0.0 > value > -0.001:
+                            value = 0.0
+                        retvalues[self.datarefs[idx]] = value
+
+            self.xplanevalues.update(retvalues)
+
+        except Exception as error:
+            logging.error("getvalues(): Xplane timed out.")
+            logging.error(error)
+
+        logging.debug("getvalues(): " + str(self.xplanevalues))
+        return self.xplanevalues
 
     def findip(self):
 
@@ -114,5 +202,6 @@ class XpUdp:
         except socket.timeout:
             logging.error("findip(): Xplane client not found (socket timeout).")
             raise exception.XpNotFoundError()
+
         finally:
             sock.close()
