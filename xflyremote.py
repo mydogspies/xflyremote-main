@@ -2,11 +2,12 @@
 # Main class for Xflyremote
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
-
-import xpudp
-import custom_exceptions as exception
+from udpserver import UdpServer as serv
+from udpclient import UdpClient as client
+from xpflyio import XpFlyIO as xpio
 import logging
 from config import CONFIG
+import custom_exceptions as exception
 
 
 class Xflyremote:
@@ -16,33 +17,35 @@ class Xflyremote:
 
 
 if __name__ == '__main__':
+    xp = xpio()
 
-    xp = xpudp.XpUdp()
+    # initiate new sockets and find xplane
+    server_socket = serv().socket()
+    client_socket = client().socket()
+    beacon_socket = serv().socket()
+    beacon = xpio().findbeacon(beacon_socket)
 
-    # connect to Xplane
-    try:
-        beacon = xp.findip()
-        xp.sendcommand("sim/lights/nav_lights_on")
-    except exception.VersionNotSupportedError:
-        exit(0)
-    except exception.XpNotFoundError:
-        exit(0)
+    # send a command to xplane
+    # * Just for testing
+    xp.sendcommand("sim/lights/nav_lights_on", client_socket)
 
-    # subscribe to datarefs
-    xp.subscribedataref("sim/cockpit/autopilot/heading_mag")
-    xp.subscribedataref("sim/cockpit/misc/barometer_setting")
-
-    # change a dataref value
+    # send some datarefs
     baro = 30.00
     heading = 360
-    xp.senddataref("sim/cockpit/misc/barometer_setting", baro, "float")
-    xp.senddataref("sim/cockpit/autopilot/heading_mag", heading, "float")
+    xp.senddataref("sim/cockpit/autopilot/heading_mag", "float", heading, client_socket, beacon)
+    xp.senddataref("sim/cockpit/misc/barometer_setting", "float", baro, client_socket, beacon)
+
+    # subscribe to some datarefs
+    xp.subscribedataref("sim/cockpit/autopilot/heading_mag", 1, server_socket, beacon)
+    xp.subscribedataref("sim/cockpit/misc/barometer_setting", 1, server_socket, beacon)
 
     # check for incoming values
     while True:
         try:
-            values = xp.getvalues()
+            values = xp.receivesubscribedvalues(server_socket)
 
         except exception.NetworkTimeoutError:
             print("XPlane Timeout")
             exit(0)
+
+
