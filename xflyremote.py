@@ -45,7 +45,7 @@ if __name__ == '__main__':
             values = xp.receivesubscribedvalues(server_socket)
 
         except exception.NetworkTimeoutError:
-            print("XPlane Timeout")
+            logging.error("main loop: Xplane timed out.")
             exit(0)
 
 
