@@ -8,6 +8,7 @@ from xpflyio import XpFlyIO as xpio
 import logging
 from config import CONFIG
 import custom_exceptions as exception
+from displayio import DisplayIO
 
 
 class Xflyremote:
@@ -18,6 +19,7 @@ class Xflyremote:
 
 if __name__ == '__main__':
     xp = xpio()
+    displayio = DisplayIO()
 
     # initiate new sockets and find xplane
     server_socket = serv().socket()
@@ -25,9 +27,12 @@ if __name__ == '__main__':
     beacon_socket = serv().socket()
     beacon = xpio().findbeacon(beacon_socket)
 
+    # initiate connection with display hardware
+    ser = displayio.connect()
+
     # send a command to xplane
     # * Just for testing
-    xp.sendcommand("sim/lights/nav_lights_on", client_socket)
+    # xp.sendcommand("sim/lights/nav_lights_on", client_socket)
 
     # send some datarefs
     baro = 30.00
@@ -47,5 +52,14 @@ if __name__ == '__main__':
         except exception.NetworkTimeoutError:
             logging.error("main loop: Xplane timed out.")
             exit(0)
+
+        # test arduino/nextion display interactivity
+        if ser.in_waiting > 0:
+            disp_cmd = displayio.getserialdata(ser)
+            print(f"DISPLAY CMD: {disp_cmd}")
+            if disp_cmd == "btn2_1":
+                xp.sendcommand("sim/lights/nav_lights_on", client_socket)
+            elif disp_cmd == "btn2_0":
+                xp.sendcommand("sim/lights/nav_lights_off", client_socket)
 
 

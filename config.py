@@ -17,3 +17,5 @@ class CONFIG:
     DBJSON = "xflydb.json"  # name of the json db file
     # test settings
     TESTFOLDERPATH = "/test"
+    # hardware display settings
+    SERIALPORT = "COM4"
