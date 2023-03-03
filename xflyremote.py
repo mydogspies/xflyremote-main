@@ -18,16 +18,26 @@ class Xflyremote:
         logging.basicConfig(level=logging.DEBUG, format=CONFIG.LOGGING_FORMAT)
         self.stopexec = False
 
-    def receivefromxplane(self, server_socket):
+    def receivefromxplane(self):
         while True:
             try:
-                xp.receivesubscribedvalues(server_socket)
+                diff = xp.receivesubscribedvalues(server_socket)
+
+                # parse difference and update hardware
+                if len(diff) != 0:
+                    try:
+                        if diff['values_changed']:
+                            data = "1"
+                            displayio.sendserialdata(ser, data)
+                    except:
+                        msg = f"receivefromxplane(): First iteration over difference list (not error)."
+                        logging.debug(msg)
 
             except exception.NetworkTimeoutError:
                 logging.error("main loop: Xplane timed out.")
                 break
 
-    def receivefromdisplay(self, serial, client_socket):
+    def receivefromdisplay(self):
         while True:
             if ser.in_waiting > 0:
                 disp_cmd = displayio.getserialdata(ser)
@@ -64,9 +74,10 @@ if __name__ == '__main__':
     # subscribe to some datarefs
     xp.subscribedataref("sim/cockpit/autopilot/heading_mag", 1, server_socket, beacon)
     xp.subscribedataref("sim/cockpit/misc/barometer_setting", 1, server_socket, beacon)
+    xp.subscribedataref("sim/cockpit/electrical/nav_lights_on", 1, server_socket, beacon)
 
     xfly = Xflyremote()
-    trecvxp = threading.Thread(target=xfly.receivefromxplane, args=[server_socket])
-    trecvdisp = threading.Thread(target=xfly.receivefromdisplay, args=[ser, client_socket])
+    trecvxp = threading.Thread(target=xfly.receivefromxplane)
+    trecvdisp = threading.Thread(target=xfly.receivefromdisplay)
     trecvxp.start()
     trecvdisp.start()

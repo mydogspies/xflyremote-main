@@ -38,6 +38,8 @@ class InitDatabase:
         testref = {"dataref": "sim/test/test",
                    "type": "cmd",
                    "units": "testunits",
+                   "onstate": 253,
+                   "offstate": 254,
                    "info": "This is test data and does not correspond to any dataref in Xplane"}
         rp.initdb()
         rp.add(testref)
@@ -47,7 +49,7 @@ class InitDatabase:
 if __name__ == '__main__':
     init = InitDatabase()
 
-    # init.initiatenewdatabase()
+    init.initiatenewdatabase()
 
     # add dataset
     file = open("xpfly_dataset.json")

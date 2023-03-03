@@ -4,24 +4,32 @@
       "dataref": "sim/lights/nav_lights_on",
       "type": "cmd",
       "units": "",
+      "onstate": 1,
+      "offstate": 2,
       "info": "Nav lights on"
     },
     {
       "dataref": "sim/lights/beacon_lights_on",
       "type": "cmd",
       "units": "",
+      "onstate": 3,
+      "offstate": 4,
       "info": "Beacon lights on"
     },
     {
       "dataref": "sim/cockpit/autopilot/heading_mag",
       "type": "float",
       "units": "degm",
+      "onstate": 0,
+      "offstate": 0,
       "info": "Magnetic heading to fly, pilot"
     },
     {
       "dataref": "sim/cockpit/misc/barometer_setting",
       "type": "float",
       "units": "",
+      "onstate": 0,
+      "offstate": 0,
       "info": "The pilots altimeter setting"
     }
   ]

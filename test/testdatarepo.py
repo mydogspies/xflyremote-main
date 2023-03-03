@@ -2,7 +2,6 @@
 # Unittest for the Datarepo class in datarepo.py
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
-import json
 import unittest
 import datarepo
 import shutil
@@ -26,6 +25,8 @@ class TestDatarepo(unittest.TestCase):
             "dataref": "sim/test/test",
             "type": "cmd",
             "units": "testunits",
+            "onstate": 253,
+            "offstate": 254,
             "info": "This is test data and does not correspond to any dataref in Xplane",
             "id": self.testid
         }]
@@ -41,5 +42,7 @@ class TestDatarepo(unittest.TestCase):
         testref = {"dataref": "sim/test/test",
                    "type": "cmd",
                    "units": "testunits",
-                  "info": "This is test data and does not correspond to any dataref in Xplane"}
+                   "onstate": 253,
+                   "offstate": 254,
+                   "info": "This is test data and does not correspond to any dataref in Xplane"}
         self.assertEqual(self.repo.add(testref), False, "Failed add()")

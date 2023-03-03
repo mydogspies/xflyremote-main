@@ -10,6 +10,7 @@ from udpserver import socket
 from config import CONFIG
 import logging
 from time import sleep
+from deepdiff import DeepDiff
 
 
 class XpFlyIO:
@@ -20,6 +21,7 @@ class XpFlyIO:
         self.datarefs = {}
         self.xpvals = {}
         self.refindex = 0
+        self.diff = {}
 
     def sendcommand(self, dataref, server_socket: socket):
         address = (CONFIG.XPLANEIP, CONFIG.DATAPORT)
@@ -102,7 +104,7 @@ class XpFlyIO:
         msg = f"senddataref(): Sent {str(data)} to Xplane with value {value}."
         logging.debug(msg)
 
-    def subscribedataref(self, dataref, frequency, server_socket : socket, beacon):
+    def subscribedataref(self, dataref, frequency, server_socket: socket, beacon):
 
         if dataref in self.datarefs.values():
             index = list(self.datarefs.keys())[list(self.datarefs.values()).index(dataref)]
@@ -125,7 +127,7 @@ class XpFlyIO:
         if self.refindex % 100 == 0:
             sleep(0.2)
 
-    def receivesubscribedvalues(self, client_socket : socket):
+    def receivesubscribedvalues(self, client_socket: socket):
 
         try:
             data, address = client_socket.recvfrom(1472)
@@ -158,5 +160,10 @@ class XpFlyIO:
 
         msg_received = f"receivesubscribedvalues(): Received {str(self.xpvals)}"
         logging.debug(msg_received)
-        return self.xpvals
 
+        # check for changes to xpvals and pass it back to  main loop
+        change = DeepDiff(self.diff, self.xpvals, ignore_order=True)
+        msg_diff = f"receivesubscribedvalues(): Values changed: {change}"
+        logging.debug(msg_diff)
+        self.diff.update(self.xpvals)
+        return change
