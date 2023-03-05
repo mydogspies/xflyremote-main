@@ -6,7 +6,6 @@
 # * Using PysonDB from Fredy Somy
 # * https://github.com/pysonDB/pysonDB
 import os
-
 from pysondb import db
 import logging
 from config import CONFIG
@@ -36,6 +35,15 @@ class Datarepo:
     def getall(self):
         pass
 
+    def getbyitem(self, index_item, data_idx):
+        try:
+            database = db.getDb(CONFIG.DBJSON)
+            query = database.getByQuery({index_item: data_idx})
+            return query
+        except Exception as error:
+            logging.warning("getbyitem(): Error when trying to run database query")
+            logging.warning(error)
+
     def getbyidx(self, data_idx):
         try:
             database = db.getDb(CONFIG.DBJSON)
@@ -55,10 +63,20 @@ class Datarepo:
             logging.warning(error)
             return 0
 
+    def getbydispcommand(self, disp_cmd):
+        try:
+            database = db.getDb(CONFIG.DBJSON)
+            query = database.getByQuery({"onstate": disp_cmd})
+            return query
+        except Exception as error:
+            logging.warning("getbydispcommand(): Error when trying to run database query")
+            logging.warning(error)
+            return 0
+
     def add(self, data):
 
         if data:
-            if self.getbydataref(data["dataref"]):
+            if self.getbyitem("dataref", data["dataref"]):
                 logging.warning("add(): Can not add dataref that already exists in database.")
                 return 0
 

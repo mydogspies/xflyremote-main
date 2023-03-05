@@ -38,8 +38,8 @@ class InitDatabase:
         testref = {"dataref": "sim/test/test",
                    "type": "cmd",
                    "units": "testunits",
-                   "onstate": 253,
-                   "offstate": 254,
+                   "unittype": "float",
+                   "onstate": "0",
                    "info": "This is test data and does not correspond to any dataref in Xplane"}
         rp.initdb()
         rp.add(testref)

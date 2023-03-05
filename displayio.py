@@ -32,7 +32,7 @@ class DisplayIO:
             return 0
 
     def sendserialdata(self, serial_connection, data):
-        send = serial_connection.write(bytes(data, 'utf-8'))
+        send = serial_connection.write(data.encode('utf-8'))
         time.sleep(0.1)
         msg = f"sendserialdata(): Data sent: {send}"
         logging.debug(msg)

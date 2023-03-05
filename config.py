@@ -12,7 +12,7 @@ class CONFIG:
     XPLANEIP = "192.168.178.40"
     DATAPORT = 49000
     BEACONPORT = 49707
-    SOCKETTIMEOUT = 3.0
+    SOCKETTIMEOUT = 2.0
     # databse settings
     DBJSON = "xflydb.json"  # name of the json db file
     # test settings

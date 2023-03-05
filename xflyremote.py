@@ -2,6 +2,8 @@
 # Main class for Xflyremote
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
+import time
+
 from udpserver import UdpServer as serv
 from udpclient import UdpClient as client
 from xpflyio import XpFlyIO as xpio
@@ -10,6 +12,7 @@ from config import CONFIG
 import custom_exceptions as exception
 from displayio import DisplayIO
 import threading
+import datarepo
 
 
 class Xflyremote:
@@ -17,6 +20,15 @@ class Xflyremote:
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG, format=CONFIG.LOGGING_FORMAT)
         self.stopexec = False
+        self.db = datarepo.Datarepo()
+        self.wait = True
+        self.disp_cmd = ""
+        self.page_button_state = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ]
 
     def receivefromxplane(self):
         while True:
@@ -38,19 +50,36 @@ class Xflyremote:
                 break
 
     def receivefromdisplay(self):
+        self.disp_cmd = ""
         while True:
             if ser.in_waiting > 0:
-                disp_cmd = displayio.getserialdata(ser)
-                logging.debug(f"receivefromdisplay(): {disp_cmd} received.")
-                if disp_cmd == "btn2_1":
-                    xp.sendcommand("sim/lights/nav_lights_on", client_socket)
-                elif disp_cmd == "btn2_0":
-                    xp.sendcommand("sim/lights/nav_lights_off", client_socket)
+                self.disp_cmd = displayio.getserialdata(ser)
+                logging.debug(f"receivefromdisplay(): {self.disp_cmd} received.")
+
+            # reply to display when it queries for page set
+                if self.disp_cmd == "s?":
+                    set = "s0"
+                    time.sleep(1)
+                    displayio.sendserialdata(ser, set)
+
+                # set the page button state array
+                if self.disp_cmd[0] == "b":
+                    result = self.db.getbyitem("onstate", self.disp_cmd)
+                    for dataref in result:
+                        xp.sendcommand(dataref['dataref'], client_socket)
+
+    def subdatarefsindb(self):
+        drefs = self.db.getbyitem("type", "dref")
+        for ref in drefs:
+            xp.subscribedataref(ref['dataref'], 1, server_socket, beacon)
+            msg = f"subdatarefsindb(): Subscribed to {ref}."
+            logging.debug(msg)
 
 
 if __name__ == '__main__':
     xp = xpio()
     displayio = DisplayIO()
+    xfly = Xflyremote()
 
     # initiate new sockets and find xplane
     server_socket = serv().socket()
@@ -61,22 +90,24 @@ if __name__ == '__main__':
     # initiate connection with display hardware
     ser = displayio.connect()
 
-    # send a command to xplane
+    # subscribe to all drefs in databse
+    xfly.subdatarefsindb()
+
     # * Just for testing
     # xp.sendcommand("sim/lights/nav_lights_on", client_socket)
 
     # send some datarefs
-    baro = 30.00
-    heading = 360
-    xp.senddataref("sim/cockpit/autopilot/heading_mag", "float", heading, client_socket, beacon)
-    xp.senddataref("sim/cockpit/misc/barometer_setting", "float", baro, client_socket, beacon)
+    # baro = 30.00
+    # heading = 360
+    # xp.senddataref("sim/cockpit/autopilot/heading_mag", "float", heading, client_socket, beacon)
+    # xp.senddataref("sim/cockpit/misc/barometer_setting", "float", baro, client_socket, beacon)
 
     # subscribe to some datarefs
-    xp.subscribedataref("sim/cockpit/autopilot/heading_mag", 1, server_socket, beacon)
-    xp.subscribedataref("sim/cockpit/misc/barometer_setting", 1, server_socket, beacon)
-    xp.subscribedataref("sim/cockpit/electrical/nav_lights_on", 1, server_socket, beacon)
+    # xp.subscribedataref("sim/cockpit/autopilot/heading_mag", 1, server_socket, beacon)
+    # xp.subscribedataref("sim/cockpit/misc/barometer_setting", 1, server_socket, beacon)
+    # xp.subscribedataref("sim/cockpit/electrical/nav_lights_on", 1, server_socket, beacon)
 
-    xfly = Xflyremote()
+    # start the loops for sending and receiving data
     trecvxp = threading.Thread(target=xfly.receivefromxplane)
     trecvdisp = threading.Thread(target=xfly.receivefromdisplay)
     trecvxp.start()

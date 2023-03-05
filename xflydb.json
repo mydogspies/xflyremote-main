@@ -4,46 +4,91 @@
          "dataref": "sim/test/test",
          "type": "cmd",
          "units": "testunits",
-         "onstate": 253,
-         "offstate": 254,
+         "unittype": "float",
+         "onstate": "0",
          "info": "This is test data and does not correspond to any dataref in Xplane",
-         "id": 479074582200472573
+         "id": 131676846557085805
       },
       {
          "dataref": "sim/lights/nav_lights_on",
          "type": "cmd",
          "units": "",
-         "onstate": 1,
-         "offstate": 2,
+         "unittype": "",
+         "onstate": "b01001",
          "info": "Nav lights on",
-         "id": 119712225027084035
+         "id": 183732361796057457
+      },
+      {
+         "dataref": "sim/lights/nav_lights_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01000",
+         "info": "Nav lights off",
+         "id": 243323837500725245
       },
       {
          "dataref": "sim/lights/beacon_lights_on",
          "type": "cmd",
          "units": "",
-         "onstate": 3,
-         "offstate": 4,
+         "unittype": "",
+         "onstate": "b01011",
          "info": "Beacon lights on",
-         "id": 159733100341133550
+         "id": 339348867843064166
+      },
+      {
+         "dataref": "sim/lights/beacon_lights_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01010",
+         "info": "Beacon lights off",
+         "id": 473963500616753015
+      },
+      {
+         "dataref": "sim/lights/landing_lights_on",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01021",
+         "info": "Landing lights on",
+         "id": 132196831503791045
+      },
+      {
+         "dataref": "sim/lights/landing_lights_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01020",
+         "info": "Landing lights off",
+         "id": 872428843136492263
+      },
+      {
+         "dataref": "sim/cockpit/electrical/nav_lights_on",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "State of nav lights",
+         "id": 290579456071017981
       },
       {
          "dataref": "sim/cockpit/autopilot/heading_mag",
-         "type": "float",
+         "type": "dref",
          "units": "degm",
-         "onstate": 0,
-         "offstate": 0,
+         "unittype": "float",
+         "onstate": "",
          "info": "Magnetic heading to fly, pilot",
-         "id": 173540055399584031
+         "id": 908827602999604681
       },
       {
          "dataref": "sim/cockpit/misc/barometer_setting",
-         "type": "float",
+         "type": "dref",
          "units": "",
-         "onstate": 0,
-         "offstate": 0,
+         "unittype": "float",
+         "onstate": "",
          "info": "The pilots altimeter setting",
-         "id": 293236209607419471
+         "id": 155851579476203639
       }
    ]
 }
