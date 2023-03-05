@@ -49,6 +49,62 @@
       "info": "Landing lights off"
     },
     {
+      "dataref": "sim/lights/taxi_lights_on",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01031",
+      "info": "Taxi lights on"
+    },
+    {
+      "dataref": "sim/lights/taxi_lights_off",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01030",
+      "info": "Taxi lights off"
+    },
+    {
+      "dataref": "sim/lights/strobe_lights_on",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01041",
+      "info": "Strobe lights on"
+    },
+    {
+      "dataref": "sim/lights/strobe_lights_off",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01040",
+      "info": "Strobe lights on"
+    },
+    {
+      "dataref": "sim/lights/strobe_lights_on",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01041",
+      "info": "Strobe lights on"
+    },
+    {
+      "dataref": "sim/view/flashlight_wht",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01091",
+      "info": "Toggle flashlight 1"
+    },
+    {
+      "dataref": "sim/view/flashlight_wht",
+      "type": "cmd",
+      "units": "",
+      "unittype": "",
+      "onstate": "b01090",
+      "info": "Toggle flashlight 1"
+    },
+    {
       "dataref": "sim/cockpit/electrical/nav_lights_on",
       "type": "dref",
       "units": "",

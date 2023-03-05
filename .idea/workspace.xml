@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Added button items in xflydb.json and logic to test for changes in the subscribed datarefs - if so, send data back to display.">
+    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Reworked the button logic by moving thr button state and page navigation logic back to the Arduino and then limply let it query once at start what page set Python tells to be. Page set array is also i the Arduino code. Python just replies with which set.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datarepo.py" beforeDir="false" afterPath="$PROJECT_DIR$/datarepo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/displayio.py" beforeDir="false" afterPath="$PROJECT_DIR$/displayio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_arduino.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_arduino.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xflydb.json" beforeDir="false" afterPath="$PROJECT_DIR$/xflydb.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xflyremote.py" beforeDir="false" afterPath="$PROJECT_DIR$/xflyremote.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xpfly_dataset.json" beforeDir="false" afterPath="$PROJECT_DIR$/xpfly_dataset.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +137,7 @@
       <workItem from="1677778430725" duration="7507000" />
       <workItem from="1677866774245" duration="9538000" />
       <workItem from="1677922480740" duration="23978000" />
-      <workItem from="1678000481457" duration="14070000" />
+      <workItem from="1678000481457" duration="16293000" />
     </task>
     <task id="LOCAL-00001" summary="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database">
       <created>1676836570548</created>
@@ -226,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677878766349</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Reworked the button logic by moving thr button state and page navigation logic back to the Arduino and then limply let it query once at start what page set Python tells to be. Page set array is also i the Arduino code. Python just replies with which set.">
+      <created>1678045659089</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1678045659089</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,16 +256,17 @@
     <MESSAGE value="Added test code for the hardware controller" />
     <MESSAGE value="Put methods to receive from display and from xplane in separate threads" />
     <MESSAGE value="Added button items in xflydb.json and logic to test for changes in the subscribed datarefs - if so, send data back to display." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added button items in xflydb.json and logic to test for changes in the subscribed datarefs - if so, send data back to display." />
+    <MESSAGE value="Reworked the button logic by moving thr button state and page navigation logic back to the Arduino and then limply let it query once at start what page set Python tells to be. Page set array is also i the Arduino code. Python just replies with which set." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworked the button logic by moving thr button state and page navigation logic back to the Arduino and then limply let it query once at start what page set Python tells to be. Page set array is also i the Arduino code. Python just replies with which set." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/xflyremote_main$.coverage" NAME=" Coverage Results" MODIFIED="1677868252883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1678040493143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1678046776663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$datarepo.coverage" NAME="datarepo Coverage Results" MODIFIED="1677078134082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$displayio.coverage" NAME="displayio Coverage Results" MODIFIED="1677962472237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1677952910718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1678046530458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$xpudp.coverage" NAME="xpudp Coverage Results" MODIFIED="1677096538642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$xpflyio.coverage" NAME="xpflyio Coverage Results" MODIFIED="1677869163615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$test_arduino.coverage" NAME="test_arduino Coverage Results" MODIFIED="1678035076014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$test_arduino.coverage" NAME="test_arduino Coverage Results" MODIFIED="1678046629296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

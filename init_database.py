@@ -49,7 +49,7 @@ class InitDatabase:
 if __name__ == '__main__':
     init = InitDatabase()
 
-    init.initiatenewdatabase()
+    # init.initiatenewdatabase()
 
     # add dataset
     file = open("xpfly_dataset.json")

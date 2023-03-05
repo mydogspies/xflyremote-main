@@ -89,6 +89,51 @@
          "onstate": "",
          "info": "The pilots altimeter setting",
          "id": 155851579476203639
+      },
+      {
+         "dataref": "sim/lights/taxi_lights_on",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01031",
+         "info": "Taxi lights on",
+         "id": 183701443610461833
+      },
+      {
+         "dataref": "sim/lights/taxi_lights_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01030",
+         "info": "Taxi lights off",
+         "id": 116464237186414260
+      },
+      {
+         "dataref": "sim/lights/strobe_lights_on",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01041",
+         "info": "Strobe lights on",
+         "id": 148551915015047497
+      },
+      {
+         "dataref": "sim/lights/strobe_lights_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01040",
+         "info": "Strobe lights on",
+         "id": 199180511460524820
+      },
+      {
+         "dataref": "sim/view/flashlight_wht",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b01091",
+         "info": "Toggle flashlight 1",
+         "id": 466825459741101160
       }
    ]
 }
