@@ -40,7 +40,8 @@ class InitDatabase:
                    "units": "testunits",
                    "unittype": "float",
                    "onstate": "0",
-                   "info": "This is test data and does not correspond to any dataref in Xplane"}
+                   "info": "This is test data and does not correspond to any dataref in Xplane",
+                   "sub": 0}
         rp.initdb()
         rp.add(testref)
         logging.info("initiatenewdataset(): Current db has been reset and re-initiated")

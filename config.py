@@ -7,7 +7,7 @@ class CONFIG:
     # logger settings
     LOGGING_LEVEL = logging.DEBUG
     LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(module)s - %(message)s"
-    # network settings
+    # network xplane settings
     MCASTIP = "239.255.1.1"
     XPLANEIP = "192.168.178.40"
     DATAPORT = 49000
@@ -19,3 +19,4 @@ class CONFIG:
     TESTFOLDERPATH = "/test"
     # hardware display settings
     SERIALPORT = "COM4"
+    SERIALTIMEOUT = 0.01

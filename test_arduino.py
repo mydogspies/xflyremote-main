@@ -8,18 +8,17 @@ class TestIO:
 
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG, format=CONFIG.LOGGING_FORMAT)
-        self.page_button_state = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]
+        # self.page_button_state = [
+        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # ]
 
     def connect(self):
         try:
-            seru = serial.Serial("COM4", 115200, timeout=1)
-            seru.flush()
+            seru = serial.Serial("COM4", 115200, timeout=0.01)
             msg = f"connect(): Connected to {seru}"
             logging.debug(msg)
             return seru
@@ -58,27 +57,11 @@ if __name__ == '__main__':
     con = testio.connect()
 
     while True:
-        if con.in_waiting > 0:
+        if con.in_waiting > 2:
             disp_cmd = testio.getserialdata(con)
-
-            # if disp_cmd[0] == "m":
-            #     page = "p1"
-            #     time.sleep(1)
-            #     testio.sendserialdata(con, page)
 
             # reply to display when it queries for page set
             if disp_cmd == "s?":
-                set = "s0"
-                time.sleep(1)
+                set = "set0"
                 testio.sendserialdata(con, set)
 
-            # set the page button state array
-            if disp_cmd[0] == "b":
-                page = int(disp_cmd[1:3])
-                button = int(disp_cmd[3:5])
-                status = testio.page_button_state[page][button]
-
-                if status:
-                    testio.page_button_state[page][button] = 0
-                else:
-                    testio.page_button_state[page][button] = 1

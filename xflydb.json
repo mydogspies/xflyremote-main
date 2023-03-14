@@ -7,7 +7,8 @@
          "unittype": "float",
          "onstate": "0",
          "info": "This is test data and does not correspond to any dataref in Xplane",
-         "id": 131676846557085805
+         "sub": 0,
+         "id": 294081530448094000
       },
       {
          "dataref": "sim/lights/nav_lights_on",
@@ -16,7 +17,8 @@
          "unittype": "",
          "onstate": "b01001",
          "info": "Nav lights on",
-         "id": 183732361796057457
+         "sub": 0,
+         "id": 435887914909694436
       },
       {
          "dataref": "sim/lights/nav_lights_off",
@@ -25,7 +27,8 @@
          "unittype": "",
          "onstate": "b01000",
          "info": "Nav lights off",
-         "id": 243323837500725245
+         "sub": 0,
+         "id": 273932339650529784
       },
       {
          "dataref": "sim/lights/beacon_lights_on",
@@ -34,7 +37,8 @@
          "unittype": "",
          "onstate": "b01011",
          "info": "Beacon lights on",
-         "id": 339348867843064166
+         "sub": 0,
+         "id": 128948746455764425
       },
       {
          "dataref": "sim/lights/beacon_lights_off",
@@ -43,7 +47,8 @@
          "unittype": "",
          "onstate": "b01010",
          "info": "Beacon lights off",
-         "id": 473963500616753015
+         "sub": 0,
+         "id": 120625525821384983
       },
       {
          "dataref": "sim/lights/landing_lights_on",
@@ -52,7 +57,8 @@
          "unittype": "",
          "onstate": "b01021",
          "info": "Landing lights on",
-         "id": 132196831503791045
+         "sub": 0,
+         "id": 110493669737380442
       },
       {
          "dataref": "sim/lights/landing_lights_off",
@@ -61,34 +67,8 @@
          "unittype": "",
          "onstate": "b01020",
          "info": "Landing lights off",
-         "id": 872428843136492263
-      },
-      {
-         "dataref": "sim/cockpit/electrical/nav_lights_on",
-         "type": "dref",
-         "units": "",
-         "unittype": "int",
-         "onstate": "",
-         "info": "State of nav lights",
-         "id": 290579456071017981
-      },
-      {
-         "dataref": "sim/cockpit/autopilot/heading_mag",
-         "type": "dref",
-         "units": "degm",
-         "unittype": "float",
-         "onstate": "",
-         "info": "Magnetic heading to fly, pilot",
-         "id": 908827602999604681
-      },
-      {
-         "dataref": "sim/cockpit/misc/barometer_setting",
-         "type": "dref",
-         "units": "",
-         "unittype": "float",
-         "onstate": "",
-         "info": "The pilots altimeter setting",
-         "id": 155851579476203639
+         "sub": 0,
+         "id": 107357177206684598
       },
       {
          "dataref": "sim/lights/taxi_lights_on",
@@ -97,7 +77,8 @@
          "unittype": "",
          "onstate": "b01031",
          "info": "Taxi lights on",
-         "id": 183701443610461833
+         "sub": 0,
+         "id": 336093535815900195
       },
       {
          "dataref": "sim/lights/taxi_lights_off",
@@ -106,7 +87,8 @@
          "unittype": "",
          "onstate": "b01030",
          "info": "Taxi lights off",
-         "id": 116464237186414260
+         "sub": 0,
+         "id": 113251385104216069
       },
       {
          "dataref": "sim/lights/strobe_lights_on",
@@ -115,7 +97,8 @@
          "unittype": "",
          "onstate": "b01041",
          "info": "Strobe lights on",
-         "id": 148551915015047497
+         "sub": 0,
+         "id": 147029490703702415
       },
       {
          "dataref": "sim/lights/strobe_lights_off",
@@ -124,7 +107,8 @@
          "unittype": "",
          "onstate": "b01040",
          "info": "Strobe lights on",
-         "id": 199180511460524820
+         "sub": 0,
+         "id": 301787581872540800
       },
       {
          "dataref": "sim/view/flashlight_wht",
@@ -133,7 +117,158 @@
          "unittype": "",
          "onstate": "b01091",
          "info": "Toggle flashlight 1",
-         "id": 466825459741101160
+         "sub": 0,
+         "id": 199489324052753709
+      },
+      {
+         "dataref": "sim/ice/pitot_heat0_on",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b05001",
+         "info": "Pitot heat on",
+         "sub": 0,
+         "id": 786889385456801799
+      },
+      {
+         "dataref": "sim/ice/pitot_heat0_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b05000",
+         "info": "Pitot heat off",
+         "sub": 0,
+         "id": 150395893018768182
+      },
+      {
+         "dataref": "sim/cockpit/electrical/nav_lights_on",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "State of nav lights",
+         "sub": 1,
+         "id": 932939474303327149
+      },
+      {
+         "dataref": "sim/cockpit/autopilot/heading_mag",
+         "type": "dref",
+         "units": "degm",
+         "unittype": "float",
+         "onstate": "",
+         "info": "Magnetic heading to fly, pilot",
+         "sub": 0,
+         "id": 482820432193918076
+      },
+      {
+         "dataref": "sim/cockpit/misc/barometer_setting",
+         "type": "dref",
+         "units": "",
+         "unittype": "float",
+         "onstate": "",
+         "info": "The pilots altimeter setting",
+         "sub": 0,
+         "id": 237430969800344420
+      },
+      {
+         "dataref": "sim/cockpit/radios/nav1_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the nav1 radio.",
+         "sub": 1,
+         "id": 309614557527096446
+      },
+      {
+         "dataref": "sim/cockpit/radios/nav2_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the nav2 radio.",
+         "sub": 0,
+         "id": 268492735013815038
+      },
+      {
+         "dataref": "sim/cockpit/radios/com1_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the com1 radio.",
+         "sub": 1,
+         "id": 340255729239597349
+      },
+      {
+         "dataref": "sim/cockpit/radios/com2_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the com2 radio.",
+         "sub": 0,
+         "id": 206482547769513832
+      },
+      {
+         "dataref": "sim/cockpit/radios/adf1_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the adf1 radio.",
+         "sub": 1,
+         "id": 182736376996244233
+      },
+      {
+         "dataref": "sim/cockpit/radios/adf2_freq_hz",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "The current frequency of the adf2 radio.",
+         "sub": 0,
+         "id": 186104715997686173
+      },
+      {
+         "dataref": "sim/cockpit/radios/transponder_code",
+         "type": "dref",
+         "units": "",
+         "unittype": "int",
+         "onstate": "",
+         "info": "Transponder code.",
+         "sub": 1,
+         "id": 179127553123973142
+      },
+      {
+         "dataref": "sim/cockpit/switches/pitot_heat_on",
+         "type": "dref",
+         "units": "",
+         "unittype": "bool",
+         "onstate": "",
+         "info": "Pitot heat on",
+         "sub": 1,
+         "id": 842152938335103009
+      },
+      {
+         "dataref": "sim/fuel/fuel_pumps_on",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b05011",
+         "info": "Fuel pump on",
+         "sub": 0,
+         "id": 329205430246508917
+      },
+      {
+         "dataref": "sim/fuel/fuel_pumps_off",
+         "type": "cmd",
+         "units": "",
+         "unittype": "",
+         "onstate": "b05010",
+         "info": "Fuel pump off",
+         "sub": 0,
+         "id": 137283822727475312
       }
    ]
 }

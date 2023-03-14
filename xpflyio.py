@@ -93,12 +93,16 @@ class XpFlyIO:
         data = b"''"
         command = b"DREF\x00"
 
+        print(command)
+        print(value)
+        print(datastring)
+
         if datatype == "float":
             data = struct.pack("<5sf500s", command, value, datastring)
         elif datatype == "int":
             data = struct.pack("<5sif500s", command, value, datastring)
         elif datatype == "bool":
-            data = struct.pack("<5sIf500s", command, value, datastring)
+            data = struct.pack("<5sIf500s", command, int(value), datastring)
 
         server_socket.sendto(data, (beacon["ip"], CONFIG.DATAPORT))
         msg = f"senddataref(): Sent {str(data)} to Xplane with value {value}."

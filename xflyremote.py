@@ -1,7 +1,8 @@
-# xflyremote.py
+# xflyremote.py v1.0
 # Main class for Xflyremote
 # License: GPLv3
 # https://github.com/mydogspies/xflyremote-main
+import sys
 import time
 
 from udpserver import UdpServer as serv
@@ -14,6 +15,16 @@ from displayio import DisplayIO
 import threading
 import datarepo
 
+thread_stop = threading.Event()
+
+
+def my_excepthook(type, value, traceback):
+    thread_stop.set()
+    sys.__excepthook__(type, value, traceback)
+
+
+sys.excepthook = my_excepthook
+
 
 class Xflyremote:
 
@@ -23,15 +34,16 @@ class Xflyremote:
         self.db = datarepo.Datarepo()
         self.wait = True
         self.disp_cmd = ""
-        self.page_button_state = [
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ]
+        # self.page_button_state = [
+        #     [0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0],
+        #     [0, 0, 0, 0, 0, 0, 0, 0]
+        # ]
 
     def receivefromxplane(self):
-        while True:
+
+        while not thread_stop.is_set():
             try:
                 diff = xp.receivesubscribedvalues(server_socket)
 
@@ -51,12 +63,13 @@ class Xflyremote:
 
     def receivefromdisplay(self):
         self.disp_cmd = ""
-        while True:
+        
+        while not thread_stop.is_set():
             if ser.in_waiting > 0:
                 self.disp_cmd = displayio.getserialdata(ser)
                 logging.debug(f"receivefromdisplay(): {self.disp_cmd} received.")
 
-            # reply to display when it queries for page set
+                # reply to display when it queries for page set
                 if self.disp_cmd == "s?":
                     set = "s0"
                     time.sleep(1)
@@ -64,16 +77,31 @@ class Xflyremote:
 
                 # set the page button state array
                 if self.disp_cmd[0] == "b":
-                    result = self.db.getbyitem("onstate", self.disp_cmd)
+                    bcmd = self.disp_cmd[0:6]
+                    result = self.db.getbyitem("onstate", bcmd)
                     for dataref in result:
-                        xp.sendcommand(dataref['dataref'], client_socket)
+                        if dataref['type'] == "cmd":
+                            xp.sendcommand(dataref['dataref'], client_socket)
+                        # elif dataref['type'] == "dref":
+                        #     xp.senddataref(dataref['dataref'], dataref['unittype'], self.disp_cmd[5], server_socket, beacon)
+
+                #  receive radio frequencies array from Arduino
+                if self.disp_cmd[0:2] == "rf":
+                    freq_values = self.disp_cmd[3:].split()
+                    print(freq_values)
+                    # xp.senddataref("sim/cockpit/radios/com1_freq_hz", "float", float(freq_values[0])*100, server_socket, beacon)
+                    xp.senddataref("sim/cockpit/radios/com2_freq_hz", "float", float(freq_values[1]) * 100,
+                                   server_socket, beacon)
+                    # xp.senddataref("sim/cockpit/radios/nav1_freq_hz", "float", float(freq_values[2])*100, server_socket, beacon)
+                    # xp.senddataref("sim/cockpit/radios/nav2_freq_hz", "float", float(freq_values[3])*100, server_socket, beacon)
 
     def subdatarefsindb(self):
         drefs = self.db.getbyitem("type", "dref")
         for ref in drefs:
-            xp.subscribedataref(ref['dataref'], 1, server_socket, beacon)
-            msg = f"subdatarefsindb(): Subscribed to {ref}."
-            logging.debug(msg)
+            if ref['sub'] == 1:
+                xp.subscribedataref(ref['dataref'], 1, server_socket, beacon)
+                msg = f"subdatarefsindb(): Subscribed to {ref}."
+                logging.debug(msg)
 
 
 if __name__ == '__main__':
@@ -92,20 +120,6 @@ if __name__ == '__main__':
 
     # subscribe to all drefs in databse
     xfly.subdatarefsindb()
-
-    # * Just for testing
-    # xp.sendcommand("sim/lights/nav_lights_on", client_socket)
-
-    # send some datarefs
-    # baro = 30.00
-    # heading = 360
-    # xp.senddataref("sim/cockpit/autopilot/heading_mag", "float", heading, client_socket, beacon)
-    # xp.senddataref("sim/cockpit/misc/barometer_setting", "float", baro, client_socket, beacon)
-
-    # subscribe to some datarefs
-    # xp.subscribedataref("sim/cockpit/autopilot/heading_mag", 1, server_socket, beacon)
-    # xp.subscribedataref("sim/cockpit/misc/barometer_setting", 1, server_socket, beacon)
-    # xp.subscribedataref("sim/cockpit/electrical/nav_lights_on", 1, server_socket, beacon)
 
     # start the loops for sending and receiving data
     trecvxp = threading.Thread(target=xfly.receivefromxplane)
