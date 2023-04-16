@@ -18,7 +18,7 @@ class TestIO:
 
     def connect(self):
         try:
-            seru = serial.Serial("COM7", 57600, timeout=0.01)
+            seru = serial.Serial("COM7", 115200, timeout=0.01)
             msg = f"connect(): Connected to {seru}"
             logging.debug(msg)
             return seru

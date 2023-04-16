@@ -34,12 +34,7 @@ class Xflyremote:
         self.db = datarepo.Datarepo()
         self.wait = True
         self.disp_cmd = ""
-        # self.page_button_state = [
-        #     [0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0]
-        # ]
+        self.startup = True  # flag for setting things up on first run
 
     def receivefromxplane(self):
 
@@ -63,11 +58,20 @@ class Xflyremote:
 
     def receivefromdisplay(self):
         self.disp_cmd = ""
-        
+
+        # MAIN WAITING THREAD
         while not thread_stop.is_set():
             if ser.in_waiting > 0:
                 self.disp_cmd = displayio.getserialdata(ser)
                 logging.debug(f"receivefromdisplay(): {self.disp_cmd} received.")
+
+                #  initial data sent to Arduino on first run
+                if self.startup:
+                    time.sleep(4)
+                    sendradiovals = "*9c0000RVAL"
+                    displayio.sendserialdata(ser, sendradiovals)
+                    logging.debug(f"receivefromdisplay(): Startup process finished.")
+                    self.startup = False
 
                 # reply to display when it queries for page set
                 if self.disp_cmd == "s?":
@@ -75,7 +79,7 @@ class Xflyremote:
                     time.sleep(1)
                     displayio.sendserialdata(ser, set)
 
-                # set the page button state array
+                # get button commands and send on to xplane
                 if self.disp_cmd[0] == "b":
                     bcmd = self.disp_cmd[0:6]
                     result = self.db.getbyitem("onstate", bcmd)

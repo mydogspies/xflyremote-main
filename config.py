@@ -20,4 +20,4 @@ class CONFIG:
     # hardware display settings
     SERIALPORT = "COM7"
     SERIALTIMEOUT = 0.01
-    SERIALRATE = 57600
+    SERIALRATE = 115200

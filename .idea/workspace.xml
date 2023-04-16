@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Made changes to work with the new version 2.x of the Nextion display code and version 3.x of Arduino code.">
+    <list default="true" id="73d5eff7-270f-4c70-aa43-dd9fc45ab353" name="Changes" comment="Updated config with BAUDRATE and changed to new coms port because of the new Nano hardware">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_arduino.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_arduino.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xflyremote.py" beforeDir="false" afterPath="$PROJECT_DIR$/xflyremote.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +61,7 @@
       <recent name="D:\30_CODING\01_MIXENV\xplane\xflyremote\xflyremote-main" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.xflyremote">
     <configuration name="xflyremote" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="xflyremote-main" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,7 +166,8 @@
       <workItem from="1681031272337" duration="101000" />
       <workItem from="1681552846072" duration="22913000" />
       <workItem from="1681580642842" duration="638000" />
-      <workItem from="1681607921168" duration="2751000" />
+      <workItem from="1681607921168" duration="3051000" />
+      <workItem from="1681630421832" duration="20608000" />
     </task>
     <task id="LOCAL-00001" summary="Added database, logging, config handling and check for duplicate datarefs when trying to add to the database">
       <created>1676836570548</created>
@@ -271,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678826919806</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updated config with BAUDRATE and changed to new coms port because of the new Nano hardware">
+      <created>1681611117942</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1681611117942</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,16 +310,17 @@
     <MESSAGE value="Reworked the button logic by moving thr button state and page navigation logic back to the Arduino and then limply let it query once at start what page set Python tells to be. Page set array is also i the Arduino code. Python just replies with which set." />
     <MESSAGE value="MAde changes to page state arrays due to added menus and added some new datarefs" />
     <MESSAGE value="Made changes to work with the new version 2.x of the Nextion display code and version 3.x of Arduino code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made changes to work with the new version 2.x of the Nextion display code and version 3.x of Arduino code." />
+    <MESSAGE value="Updated config with BAUDRATE and changed to new coms port because of the new Nano hardware" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated config with BAUDRATE and changed to new coms port because of the new Nano hardware" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/xflyremote_main$.coverage" NAME=" Coverage Results" MODIFIED="1677868252883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1681610816518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$xflyremote.coverage" NAME="xflyremote Coverage Results" MODIFIED="1681660887781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$datarepo.coverage" NAME="datarepo Coverage Results" MODIFIED="1677078134082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$displayio.coverage" NAME="displayio Coverage Results" MODIFIED="1678549834012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$init_database.coverage" NAME="init_database Coverage Results" MODIFIED="1678551904301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$xpudp.coverage" NAME="xpudp Coverage Results" MODIFIED="1677096538642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/xflyremote_main$xpflyio.coverage" NAME="xpflyio Coverage Results" MODIFIED="1678550977501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/xflyremote_main$test_arduino.coverage" NAME="test_arduino Coverage Results" MODIFIED="1681609945218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/xflyremote_main$test_arduino.coverage" NAME="test_arduino Coverage Results" MODIFIED="1681657969216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
