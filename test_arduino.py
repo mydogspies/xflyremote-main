@@ -18,7 +18,7 @@ class TestIO:
 
     def connect(self):
         try:
-            seru = serial.Serial("COM4", 115200, timeout=0.01)
+            seru = serial.Serial("COM7", 57600, timeout=0.01)
             msg = f"connect(): Connected to {seru}"
             logging.debug(msg)
             return seru
@@ -30,7 +30,8 @@ class TestIO:
 
     def getserialdata(self, serial_connection):
         try:
-            data = serial_connection.readline().decode('utf-8').rstrip()
+            # data = serial_connection.readline().decode('utf-8').rstrip()
+            data = serial_connection.readline() # for testing only
             msg = f"getserialdata(): String received: {data}"
             logging.debug(msg)
             return data

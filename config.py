@@ -18,5 +18,6 @@ class CONFIG:
     # test settings
     TESTFOLDERPATH = "/test"
     # hardware display settings
-    SERIALPORT = "COM4"
+    SERIALPORT = "COM7"
     SERIALTIMEOUT = 0.01
+    SERIALRATE = 57600

@@ -8,7 +8,7 @@ class DisplayIO:
 
     def connect(self):
         try:
-            ser = serial.Serial(CONFIG.SERIALPORT, 115200, timeout=CONFIG.SERIALTIMEOUT)
+            ser = serial.Serial(CONFIG.SERIALPORT, CONFIG.SERIALRATE, timeout=CONFIG.SERIALTIMEOUT)
             ser.flush()
             msg = f"connect(): Connected to {ser}"
             logging.debug(msg)
